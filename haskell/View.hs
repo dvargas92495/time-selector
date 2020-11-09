@@ -1,11 +1,23 @@
-{-# LANGUAGE OverloadedStrings, OverloadedLists #-}
+{-# LANGUAGE MultiWayIf, OverloadedStrings, OverloadedLists #-}
 
-module Poli.Web.Widgets.TimeSelector.View (view) where
+module TimeSelector.View (view) where
 
 import qualified Data.Text as T
+import Data.Map.Strict
+import Data.Time.Format
 
-import Poli.Web.Base
-import Poli.Web.Widgets.TimeSelector.State
+import Miso.String
+import Miso.Html
+import Miso.Event.Types
+import TimeSelector.State
+import Prelude hiding (length)
+import Control.Lens.Indexed
+
+bool :: a -> a -> Bool -> a
+bool ifTrue ifFalse cond = if cond then ifTrue else ifFalse
+
+(.~) :: Action -> v -> Action
+a .~ v = \f -> f a v
 
 view :: String -> State -> View Action
 view k s = div_ []

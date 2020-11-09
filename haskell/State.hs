@@ -1,6 +1,6 @@
-{-# LANGUAGE DeriveAnyClass, TemplateHaskell #-}
+{-# LANGUAGE DeriveAnyClass, DeriveGeneric, TemplateHaskell, OverloadedStrings #-}
 
-module Poli.Web.Widgets.TimeSelector.State
+module TimeSelector.State
     ( Action(..)
     , Output(..)
     , State(..)
@@ -13,10 +13,13 @@ module Poli.Web.Widgets.TimeSelector.State
     , mkState
     ) where
 
+import GHC.Generics
+import Data.Aeson
 import Data.Time (LocalTime)
+import Miso.String
+import Control.Lens
 
-import Poli.Web.Base
-import qualified Poli.Web.Widgets.Modal.State as M
+-- import qualified Poli.Web.Widgets.Modal.State as M
 
 data State = State
     { _sIndex :: Int
@@ -36,7 +39,7 @@ data Action
     | Output Output
     | SearchTimes MisoString
     | Select Int
-    | ModalAction M.Output
+--    | ModalAction M.Output
     | NoOp
 
 data Output

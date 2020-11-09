@@ -8,6 +8,7 @@ module Main where
 -- | Miso framework import
 import Miso
 import Miso.String
+import qualified View as TimeSelector
 
 -- | Type synonym for an application model
 type Model = Int
@@ -52,4 +53,5 @@ viewModel x = div_ [] [
    button_ [ onClick AddOne ] [ text "+" ]
  , text (ms x)
  , button_ [ onClick SubtractOne ] [ text "-" ]
+ , TimeSelector
  ]

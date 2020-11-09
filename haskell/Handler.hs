@@ -1,4 +1,4 @@
-module Poli.Web.Widgets.TimeSelector.Handler (handler) where
+module TimeSelector.Handler (handler) where
 
 import Control.Applicative (many, optional, some, (<|>))
 import Data.Char (isNumber)
