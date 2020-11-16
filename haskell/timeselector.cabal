@@ -10,3 +10,9 @@ library
   exposed-modules:     TimeSelector.View
   other-modules:       TimeSelector.State
   default-language:    Haskell2010
+
+executable demo
+  main-is:             Demo.hs
+  ghcjs-options:       -dedupe
+  build-depends:       base, miso, time, text, aeson, lens, containers
+  default-language:    Haskell2010
