@@ -12,7 +12,7 @@
     "prepublishOnly": "npm t",
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags",
+    "postversion": "git push fork main && git push --tags fork main",
     "pretest": "npm run lint",
     "test": "jest --config jestconfig.json"
   },
