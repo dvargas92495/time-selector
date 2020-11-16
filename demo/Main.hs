@@ -8,24 +8,20 @@ module Main where
 -- | Miso framework import
 import Miso
 import Miso.String
-import qualified View as TimeSelector
+import TimeSelector.View
+import TimeSelector.State (mkState, Action( NoOp ))
 
 -- | Type synonym for an application model
 type Model = Int
 
--- | Sum type for application events
-data Action
-  = AddOne
-  | SubtractOne
-  | NoOp
-  | SayHelloWorld
-  deriving (Show, Eq)
+updateModel :: Action -> Model -> Effect Action Model
+updateModel action m = noEff m
 
 -- | Entry point for a miso application
 main :: IO ()
 main = startApp App {..}
   where
-    initialAction = SayHelloWorld -- initial action to be executed on application load
+    initialAction = NoOp
     model  = 0                    -- initial model
     update = updateModel          -- update function
     view   = viewModel            -- view function
@@ -34,24 +30,8 @@ main = startApp App {..}
     mountPoint = Nothing          -- mount point for application (Nothing defaults to 'body')
     logLevel = Off                -- used during prerendering to see if the VDOM and DOM are in sync (only applies to `miso` function)
 
--- | Updates model, optionally introduces side effects
-updateModel :: Action -> Model -> Effect Action Model
-updateModel action m =
-  case action of
-    AddOne
-      -> noEff (m + 1)
-    SubtractOne
-      -> noEff (m - 1)
-    NoOp
-      -> noEff m
-    SayHelloWorld
-      -> m <# do consoleLog "Hello World" >> pure NoOp
-
 -- | Constructs a virtual DOM from a model
 viewModel :: Model -> View Action
 viewModel x = div_ [] [
-   button_ [ onClick AddOne ] [ text "+" ]
- , text (ms x)
- , button_ [ onClick SubtractOne ] [ text "-" ]
- , TimeSelector
+  TimeSelector.View.view "" (mkState False)
  ]

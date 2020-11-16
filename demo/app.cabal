@@ -7,8 +7,7 @@ cabal-version:       >=1.10
 
 executable app
   main-is:             Main.hs
-  other-modules:       Poli.Web.Widgets.TimeSelector.View
   ghcjs-options:
     -dedupe
-  build-depends:       base, miso
+  build-depends:       base, miso, time, text, aeson, lens, containers
   default-language:    Haskell2010

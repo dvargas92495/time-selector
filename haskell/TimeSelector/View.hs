@@ -5,19 +5,14 @@ module TimeSelector.View (view) where
 import qualified Data.Text as T
 import Data.Map.Strict
 import Data.Time.Format
+import Data.Bool (bool)
 
-import Miso.String
+import Miso (View)
+import Miso.String (MisoString, ms)
 import Miso.Html
 import Miso.Event.Types
 import TimeSelector.State
-import Prelude hiding (length)
-import Control.Lens.Indexed
-
-bool :: a -> a -> Bool -> a
-bool ifTrue ifFalse cond = if cond then ifTrue else ifFalse
-
-(.~) :: Action -> v -> Action
-a .~ v = \f -> f a v
+import Control.Lens (itoList, (.~), (&), (^.), (<&>))
 
 view :: String -> State -> View Action
 view k s = div_ []

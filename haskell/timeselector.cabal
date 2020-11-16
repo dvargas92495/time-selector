@@ -7,6 +7,6 @@ cabal-version:       >=1.10
 
 library
   build-depends:       base, time, text, miso, aeson, lens, containers
-  exposed-modules:     View
-  other-modules:       State
+  exposed-modules:     TimeSelector.View
+  other-modules:       TimeSelector.State
   default-language:    Haskell2010
